@@ -18,7 +18,7 @@ async function bootstrap() {
   app.use(helmet());
 
   app.enableCors({
-    origin: configService.get<string>('FRONTEND_URL', 'http://localhost:3000'),
+    origin: '*', // Allows requests from Vercel or any other domain
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     credentials: true,
   });
