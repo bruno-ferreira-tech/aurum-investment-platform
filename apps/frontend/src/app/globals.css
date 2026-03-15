@@ -1,0 +1,208 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gold: #d4af37;
+  --gold-light: #f5e9a3;
+  --gold-dark: #b8922a;
+  --dark: #0a0a0a;
+  --dark-mid: #141414;
+  --dark-light: #1a1a1a;
+  --foreground: #ffffff;
+  --foreground-muted: #a4a4a4;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--dark);
+  color: var(--foreground);
+  font-family: var(--font-sans, 'Inter', system-ui, sans-serif);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(212, 175, 55, 0.3);
+  color: var(--gold);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold-dark);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  .gold-text {
+    background: linear-gradient(135deg, #d4af37, #f5e9a3, #d4af37);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-gold {
+    background: rgba(212, 175, 55, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-8 py-4 bg-gold-500 text-dark-950 font-semibold rounded-full transition-all duration-300 hover:bg-gold-400 hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] hover:scale-105 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-8 py-4 text-white font-semibold rounded-full transition-all duration-300;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(212, 175, 55, 0.05);
+    border-color: rgba(212, 175, 55, 0.3);
+    color: #e3c44a;
+  }
+
+  .section-tag {
+    @apply inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-gold-400 text-sm font-medium tracking-wide uppercase;
+    background: rgba(212, 175, 55, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+  }
+
+  .stat-card {
+    @apply glass rounded-2xl p-6 transition-all duration-500;
+  }
+
+  .stat-card:hover {
+    background: rgba(212, 175, 55, 0.05);
+    border-color: rgba(212, 175, 55, 0.2);
+  }
+
+  .product-card {
+    @apply glass rounded-3xl p-8 transition-all duration-500 cursor-pointer;
+  }
+
+  .product-card:hover {
+    background: rgba(212, 175, 55, 0.05);
+    border-color: rgba(212, 175, 55, 0.2);
+  }
+
+  .market-row {
+    @apply flex items-center justify-between py-3 px-4 rounded-xl hover:bg-white/5 transition-all duration-200 cursor-pointer;
+  }
+
+  .positive { @apply text-emerald-400; }
+  .negative { @apply text-red-400; }
+  .neutral { @apply text-dark-300; }
+}
+
+.noise-bg {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+.hero-glow {
+  background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(212, 175, 55, 0.15) 0%, transparent 60%);
+}
+
+.section-glow {
+  background: radial-gradient(ellipse 60% 40% at 50% 100%, rgba(212, 175, 55, 0.08) 0%, transparent 60%);
+}
+
+/* Ticker animation */
+.ticker-container {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ticker-track {
+  display: inline-flex;
+  animation: ticker 40s linear infinite;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* Chart animations */
+.recharts-line-curve {
+  stroke-dasharray: 5000;
+  stroke-dashoffset: 5000;
+  animation: drawLine 2s ease forwards;
+}
+
+@keyframes drawLine {
+  to { stroke-dashoffset: 0; }
+}
+
+/* GSAP initial states - using CSS for better performance */
+.gsap-hidden,
+.gsap-hidden-left,
+.gsap-hidden-right,
+.gsap-scale-hidden {
+  opacity: 1;
+  transform: none;
+}
+
+/* Fallback: animate on load for browsers without JS */
+@media (prefers-reduced-motion: no-preference) {
+  .gsap-hidden {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+
+  .gsap-hidden-left {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+
+  .gsap-hidden-right {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+
+  .gsap-scale-hidden {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+}
