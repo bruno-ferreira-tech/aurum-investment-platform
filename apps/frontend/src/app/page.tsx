@@ -15,7 +15,7 @@ import CtaSection from '@/components/sections/CtaSection';
 export default function Home() {
   useEffect(() => {
     let animFrameId: number;
-    let lenisInstance: { raf: (t: number) => void; destroy: () => void; on: (e: string, cb: unknown) => void } | null = null;
+    let lenisInstance: any = null;
 
     const initLenis = async () => {
       const Lenis = (await import('lenis')).default;
